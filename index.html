@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dr. Shweta's Dental Clinic - Gentle Dental Care in Kalkaji, New Delhi. Root Canal, Implants, Braces, Whitening, Kids Dentistry. 4.6★ Google rating. Book via WhatsApp.">
+    <meta name="description" content="Dr. Shweta's Dental Clinic - Kalkaji, New Delhi. Gentle dental care for families & children.">
     <title>Dr. Shweta's Dental Clinic | Kalkaji, New Delhi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -12,21 +12,19 @@
         body { font-family: 'Inter', sans-serif; }
         .heading-font { font-family: 'Playfair Display', sans-serif; }
         .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.imghippo.com/i/qvG7099f.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                        url('https://i.ibb.co/kVnF53bh/Screenshot-2026-03-14-10-32-21-602-com-google-android-apps-maps-edit.jpg') center/cover no-repeat;
             background-attachment: scroll;
         }
+        .nav-link:hover { color: #0ea5e9; }
         .service-card:hover { transform: translateY(-8px); transition: all 0.3s; }
-        .nav-link { position: relative; }
-        .nav-link:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #0ea5e9; transition: width 0.3s; }
-        .nav-link:hover:after { width: 100%; }
-        .gallery-img { transition: transform 0.3s ease; }
-        .gallery-img:hover { transform: scale(1.05); }
         @media (max-width: 640px) {
-            h2 { font-size: 2.5rem !important; }
-            .text-6xl, .text-7xl, .text-8xl { font-size: 2.25rem !important; line-height: 1.1 !important; }
-            .py-24 { padding-top: 4rem !important; padding-bottom: 4rem !important; }
-            .px-6 { padding-left: 1rem !important; padding-right: 1rem !important; }
-            button, input, select, textarea { font-size: 1.1rem !important; padding: 1rem !important; }
+            h2 { font-size: 2.25rem !important; }
+            .text-6xl { font-size: 2.5rem !important; }
+            .py-20 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+            button, input, select, textarea { font-size: 1.05rem !important; padding: 1rem !important; min-height: 48px; }
+            .nav-icon { font-size: 1.8rem !important; }
+            .gap-6 { gap: 1.25rem !important; }
         }
     </style>
 </head>
@@ -36,58 +34,58 @@
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-sky-600 rounded-full flex items-center justify-center text-white text-3xl">🦷</div>
+                <div class="w-12 h-12 bg-sky-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">🦷</div>
                 <div>
                     <h1 class="heading-font text-2xl font-bold text-sky-700">Dr. Shweta's</h1>
                     <p class="text-xs text-sky-600 -mt-1">DENTAL CLINIC</p>
                 </div>
             </div>
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#about" class="nav-link font-medium">About</a>
-                <a href="#services" class="nav-link font-medium">Services</a>
-                <a href="#hours" class="nav-link font-medium">Hours</a>
-                <a href="#book" class="nav-link font-medium">Book</a>
-                <a href="#contact" class="nav-link font-medium">Contact</a>
+            <div class="hidden md:flex items-center gap-8 text-base font-medium">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#hours" class="nav-link">Hours</a>
+                <a href="#book" class="nav-link">Book</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="flex items-center gap-4">
-                <a href="tel:+911126414243" class="hidden sm:flex items-center gap-2 bg-sky-100 text-sky-700 px-4 py-2 rounded-full font-medium hover:bg-sky-200">
-                    <i class="fas fa-phone"></i> Call
+                <a href="tel:+911126414243" class="hidden sm:flex items-center gap-2 bg-sky-100 text-sky-700 px-5 py-3 rounded-full font-medium hover:bg-sky-200">
+                    <i class="fas fa-phone nav-icon"></i> Call
                 </a>
-                <a href="https://wa.me/911126414243" target="_blank" class="bg-green-600 text-white px-5 py-2 rounded-full font-medium hover:bg-green-700 flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i>
+                <a href="https://wa.me/911126414243" target="_blank" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 flex items-center gap-2">
+                    <i class="fab fa-whatsapp nav-icon"></i>
                 </a>
-                <button id="mobile-btn" class="md:hidden text-3xl text-sky-700">☰</button>
+                <button id="mobile-btn" class="md:hidden text-4xl text-sky-700">☰</button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-6 py-6 space-y-4">
-            <a href="#about" class="block text-lg">About</a>
-            <a href="#services" class="block text-lg">Services</a>
-            <a href="#hours" class="block text-lg">Hours</a>
-            <a href="#book" class="block text-lg">Book Appointment</a>
-            <a href="#contact" class="block text-lg">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-6 py-6 space-y-5 text-lg font-medium">
+            <a href="#about" class="block">About</a>
+            <a href="#services" class="block">Services</a>
+            <a href="#hours" class="block">Hours</a>
+            <a href="#book" class="block">Book Appointment</a>
+            <a href="#contact" class="block">Contact</a>
         </div>
     </nav>
 
     <!-- HERO -->
-    <header class="hero-bg h-[80vh] min-h-[500px] flex items-center text-white">
+    <header class="hero-bg h-screen flex items-center text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-            <p class="text-sky-200 uppercase tracking-wider text-sm sm:text-base mb-4">Kalkaji, New Delhi</p>
+            <p class="uppercase tracking-wider text-sky-200 text-sm sm:text-base mb-4">Kalkaji, New Delhi</p>
             <h2 class="heading-font text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-6">Your Smile,<br>Our Priority</h2>
             <p class="text-lg sm:text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Gentle, advanced dental care for families & children. Root Canal • Implants • Braces • Whitening</p>
             <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="#book" class="bg-white text-sky-700 font-semibold text-lg sm:text-xl px-8 sm:px-10 py-5 sm:py-6 rounded-full hover:bg-sky-50 shadow-lg flex items-center justify-center gap-3">
-                    <i class="fas fa-calendar"></i> Book Now
+                <a href="#book" class="bg-white text-sky-700 font-bold text-lg sm:text-xl px-10 py-5 sm:py-6 rounded-full hover:bg-sky-50 shadow-xl flex items-center justify-center gap-3 w-full sm:w-auto">
+                    <i class="fas fa-calendar nav-icon"></i> Book Now
                 </a>
-                <a href="https://wa.me/911126414243?text=Hello%20Dr.%20Shweta..." target="_blank" class="border-2 border-white text-white font-semibold text-lg sm:text-xl px-8 sm:px-10 py-5 sm:py-6 rounded-full hover:bg-white hover:text-sky-700 flex items-center justify-center gap-3">
-                    <i class="fab fa-whatsapp text-2xl"></i> WhatsApp
+                <a href="https://wa.me/911126414243?text=Hello%20Dr.%20Shweta..." target="_blank" class="border-2 border-white text-white font-bold text-lg sm:text-xl px-10 py-5 sm:py-6 rounded-full hover:bg-white hover:text-sky-700 flex items-center justify-center gap-3 w-full sm:w-auto">
+                    <i class="fab fa-whatsapp nav-icon"></i> WhatsApp Us
                 </a>
             </div>
-            <div class="mt-10 flex flex-wrap justify-center gap-6 text-sm sm:text-base">
-                <div class="flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full">
-                    <div class="flex text-yellow-400">★★★★★</div>
+            <div class="mt-12 flex flex-wrap justify-center gap-8 text-sm sm:text-base">
+                <div class="flex items-center gap-3 bg-white/20 px-6 py-3 rounded-full">
+                    <div class="flex text-yellow-400 text-2xl">★★★★★</div>
                     <span>4.6 (100+ reviews)</span>
                 </div>
-                <div class="bg-white/20 px-4 py-2 rounded-full">D-42, Kalkaji, New Delhi 110019</div>
+                <div class="bg-white/20 px-6 py-3 rounded-full">D-42, Post Office Marg, Kalkaji, 110019</div>
             </div>
         </div>
     </header>
@@ -95,16 +93,16 @@
     <!-- ABOUT -->
     <section id="about" class="py-16 sm:py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <span class="bg-sky-100 text-sky-700 px-4 py-1 rounded-full text-sm font-semibold">15+ Years of Care</span>
-                    <h2 class="heading-font text-4xl sm:text-5xl font-bold mt-6">Dr. Shweta's Dental Clinic</h2>
-                    <p class="mt-6 text-base sm:text-lg text-gray-700 leading-relaxed">
-                        Modern, child-friendly clinic in South Delhi offering painless treatments in a comfortable setting.
+                    <span class="bg-sky-100 text-sky-700 px-5 py-2 rounded-full text-sm font-semibold">15+ Years of Trusted Care</span>
+                    <h2 class="heading-font text-4xl sm:text-5xl font-bold mt-6 leading-tight">Dr. Shweta's Dental Clinic</h2>
+                    <p class="mt-8 text-base sm:text-lg leading-relaxed text-gray-700">
+                        We provide painless, high-quality dental treatments in a warm, child-friendly environment in South Delhi.
                     </p>
                 </div>
-                <div class="rounded-2xl overflow-hidden shadow-xl">
-                    <img src="https://www.imghippo.com/i/Zc4111fQ.jpg" alt="Clinic team" class="w-full">
+                <div class="rounded-3xl overflow-hidden shadow-2xl">
+                    <img src="https://i.ibb.co/HD59cns8/Screenshot-2026-03-14-10-32-39-460-com-google-android-apps-maps-edit.jpg" alt="Clinic team & interior" class="w-full">
                 </div>
             </div>
         </div>
@@ -114,26 +112,26 @@
     <section id="services" class="py-16 sm:py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <h2 class="heading-font text-4xl sm:text-5xl font-bold text-center mb-12">Our Services</h2>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="service-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <div class="text-5xl mb-4">🦷</div>
-                    <h3 class="text-xl sm:text-2xl font-semibold">Root Canal</h3>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <div class="service-card bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
+                    <div class="text-6xl mb-4">🦷</div>
+                    <h3 class="text-xl sm:text-2xl font-bold">Root Canal</h3>
                     <p class="mt-3 text-gray-600">Painless single-visit treatment</p>
                 </div>
-                <div class="service-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <div class="text-5xl mb-4">🔩</div>
-                    <h3 class="text-xl sm:text-2xl font-semibold">Implants</h3>
-                    <p class="mt-3 text-gray-600">Permanent tooth replacement</p>
+                <div class="service-card bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
+                    <div class="text-6xl mb-4">🔩</div>
+                    <h3 class="text-xl sm:text-2xl font-bold">Dental Implants</h3>
+                    <p class="mt-3 text-gray-600">Permanent & natural-looking</p>
                 </div>
-                <div class="service-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <div class="text-5xl mb-4">😁</div>
-                    <h3 class="text-xl sm:text-2xl font-semibold">Braces</h3>
-                    <p class="mt-3 text-gray-600">Aligners & traditional options</p>
+                <div class="service-card bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
+                    <div class="text-6xl mb-4">😁</div>
+                    <h3 class="text-xl sm:text-2xl font-bold">Braces & Aligners</h3>
+                    <p class="mt-3 text-gray-600">For beautiful straight teeth</p>
                 </div>
-                <div class="service-card bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100">
-                    <div class="text-5xl mb-4">✨</div>
-                    <h3 class="text-xl sm:text-2xl font-semibold">Whitening</h3>
-                    <p class="mt-3 text-gray-600">Bright, confident smiles</p>
+                <div class="service-card bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
+                    <div class="text-6xl mb-4">✨</div>
+                    <h3 class="text-xl sm:text-2xl font-bold">Teeth Whitening</h3>
+                    <p class="mt-3 text-gray-600">Instant brighter smile</p>
                 </div>
             </div>
         </div>
@@ -143,92 +141,76 @@
     <section id="hours" class="py-16 sm:py-20 bg-sky-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6">
             <h2 class="heading-font text-4xl sm:text-5xl font-bold text-center mb-10">Clinic Timings</h2>
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
                 <table class="w-full text-base sm:text-lg">
                     <thead class="bg-sky-700 text-white">
                         <tr>
-                            <th class="py-5 px-6 text-left">Day</th>
-                            <th class="py-5 px-6 text-left">Hours</th>
+                            <th class="py-6 px-8 text-left">Day</th>
+                            <th class="py-6 px-8 text-left">Timings</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y">
-                        <tr><td class="py-5 px-6 font-medium">Mon–Sat</td><td class="py-5 px-6">9:00 AM – 1:00 PM<br>4:00 PM – 7:00 PM</td></tr>
-                        <tr class="bg-red-50"><td class="py-5 px-6 font-medium text-red-700">Sunday</td><td class="py-5 px-6 text-red-700">Closed</td></tr>
+                        <tr><td class="py-6 px-8 font-medium">Monday – Saturday</td><td class="py-6 px-8">9:00 AM – 1:00 PM<br>4:00 PM – 7:00 PM</td></tr>
+                        <tr class="bg-red-50"><td class="py-6 px-8 font-medium text-red-700">Sunday</td><td class="py-6 px-8 text-red-700">Closed</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
 
-    <!-- BOOKING -->
-    <section id="book" class="py-16 sm:py-20">
+    <!-- BOOKING FORM -->
+    <section id="book" class="py-16 sm:py-20 bg-white">
         <div class="max-w-2xl mx-auto px-4 sm:px-6">
-            <h2 class="heading-font text-4xl sm:text-5xl font-bold text-center mb-10">Book Appointment</h2>
-            <form id="booking-form" class="bg-white shadow-2xl rounded-2xl p-6 sm:p-10">
+            <h2 class="heading-font text-4xl sm:text-5xl font-bold text-center mb-10">Book Your Appointment</h2>
+            <form id="booking-form" class="bg-white shadow-2xl rounded-3xl p-6 sm:p-10 border border-gray-200">
                 <div class="grid sm:grid-cols-2 gap-6">
                     <div>
-                        <label class="block font-medium mb-2">Name</label>
-                        <input id="name" type="text" required class="w-full px-4 py-3 border rounded-xl focus:border-sky-500">
+                        <label class="block font-medium mb-2">Full Name</label>
+                        <input id="name" type="text" required class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
                     </div>
                     <div>
                         <label class="block font-medium mb-2">Age</label>
-                        <input id="age" type="number" required min="1" class="w-full px-4 py-3 border rounded-xl focus:border-sky-500">
+                        <input id="age" type="number" required min="1" class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
                     </div>
                 </div>
                 <div class="mt-6">
-                    <label class="block font-medium mb-2">Mobile</label>
-                    <input id="mobile" type="tel" required class="w-full px-4 py-3 border rounded-xl focus:border-sky-500">
+                    <label class="block font-medium mb-2">Mobile Number</label>
+                    <input id="mobile" type="tel" required class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
                 </div>
                 <div class="grid sm:grid-cols-2 gap-6 mt-6">
                     <div>
-                        <label class="block font-medium mb-2">Date</label>
-                        <input id="date" type="date" required class="w-full px-4 py-3 border rounded-xl focus:border-sky-500">
+                        <label class="block font-medium mb-2">Preferred Date</label>
+                        <input id="date" type="date" required class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block font-medium mb-2">Time</label>
-                        <select id="time" required class="w-full px-4 py-3 border rounded-xl focus:border-sky-500">
-                            <option value="">Select</option>
+                        <label class="block font-medium mb-2">Preferred Time</label>
+                        <select id="time" required class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
+                            <option value="">Select slot</option>
                         </select>
                     </div>
                 </div>
                 <div class="mt-6">
-                    <label class="block font-medium mb-2">Concern</label>
-                    <textarea id="problem" rows="3" class="w-full px-4 py-3 border rounded-xl focus:border-sky-500"></textarea>
+                    <label class="block font-medium mb-2">Problem / Concern</label>
+                    <textarea id="problem" rows="3" class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none"></textarea>
                 </div>
-                <button type="submit" class="mt-8 w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 flex items-center justify-center gap-3 text-lg">
+                <button type="submit" class="mt-10 w-full bg-green-600 text-white font-bold py-5 rounded-2xl hover:bg-green-700 flex items-center justify-center gap-3 text-lg">
                     <i class="fab fa-whatsapp text-2xl"></i> Send to WhatsApp
                 </button>
             </form>
         </div>
     </section>
 
-    <!-- GALLERY - Your new Google Maps screenshots -->
-    <section class="py-16 sm:py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <h2 class="heading-font text-4xl sm:text-5xl font-bold text-center mb-10">Our Google Profile</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
-                <img src="https://i.ibb.co/LdCkSbMd/Screenshot-2026-03-14-10-33-25-167-com-google-android-apps-maps-edit.jpg" alt="Google Maps profile 1" class="gallery-img rounded-2xl shadow-md w-full">
-                <img src="https://i.ibb.co/DcBR7BH/Screenshot-2026-03-14-10-33-09-632-com-google-android-apps-maps-edit.jpg" alt="Google Maps profile 2" class="gallery-img rounded-2xl shadow-md w-full">
-                <img src="https://i.ibb.co/HD59cns8/Screenshot-2026-03-14-10-32-39-460-com-google-android-apps-maps-edit.jpg" alt="Google Maps profile 3" class="gallery-img rounded-2xl shadow-md w-full">
-                <img src="https://i.ibb.co/kVnF53bh/Screenshot-2026-03-14-10-32-21-602-com-google-android-apps-maps-edit.jpg" alt="Google Maps profile 4" class="gallery-img rounded-2xl shadow-md w-full">
-                <img src="https://i.ibb.co/4RGTsK5y/Screenshot-2026-03-14-10-31-59-792-com-google-android-apps-maps-edit.jpg" alt="Google Maps profile 5" class="gallery-img rounded-2xl shadow-md w-full">
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
+    <!-- CONTACT & MAP -->
     <section id="contact" class="py-16 sm:py-20 bg-sky-700 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12">
             <div>
                 <h2 class="heading-font text-4xl sm:text-5xl font-bold mb-8">Visit Us</h2>
                 <div class="space-y-6 text-lg">
-                    <div class="flex gap-4">
+                    <div class="flex gap-5 items-start">
                         <i class="fas fa-map-marker-alt text-4xl mt-1"></i>
-                        <div>
-                            D-42, Post Office Marg<br>Block D, Kalkaji<br>New Delhi, Delhi 110019
-                        </div>
+                        <div>D-42, Post Office Marg<br>Block D, Kalkaji<br>New Delhi, Delhi 110019</div>
                     </div>
-                    <div class="flex gap-4">
+                    <div class="flex gap-5 items-start">
                         <i class="fas fa-phone text-4xl mt-1"></i>
                         <div>
                             <a href="tel:+911126414243" class="text-2xl hover:underline">+91 11 2641 4243</a>
@@ -236,8 +218,8 @@
                     </div>
                 </div>
             </div>
-            <div class="rounded-2xl overflow-hidden shadow-2xl">
-                <iframe width="100%" height="350" style="border:0;" loading="lazy" allowfullscreen 
+            <div class="rounded-3xl overflow-hidden shadow-2xl">
+                <iframe width="100%" height="350" style="border:0;" allowfullscreen loading="lazy"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.5!2d77.269!3d28.548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce!2sD-42%2C%20Kalkaji%2C%20New%20Delhi!5e0!3m2!1sen!2sin"></iframe>
             </div>
         </div>
@@ -255,44 +237,46 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Booking form
+        // Booking form WhatsApp
         const form = document.getElementById('booking-form');
-        const dateEl = document.getElementById('date');
-        const timeEl = document.getElementById('time');
+        const dateInput = document.getElementById('date');
+        const timeSelect = document.getElementById('time');
 
-        dateEl.min = new Date().toISOString().split('T')[0];
+        dateInput.min = new Date().toISOString().split('T')[0];
 
-        const times = ["09:00 AM","09:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM",
-                       "04:00 PM","04:30 PM","05:00 PM","05:30 PM","06:00 PM","06:30 PM"];
+        const timeSlots = ["09:00 AM","09:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM",
+                           "04:00 PM","04:30 PM","05:00 PM","05:30 PM","06:00 PM","06:30 PM"];
 
-        function updateTimes() {
-            timeEl.innerHTML = '<option value="">Select</option>';
-            times.forEach(t => timeEl.innerHTML += `<option>${t}</option>`);
+        function populateTimes() {
+            timeSelect.innerHTML = '<option value="">Select slot</option>';
+            timeSlots.forEach(slot => {
+                timeSelect.innerHTML += `<option>${slot}</option>`;
+            });
         }
 
-        dateEl.addEventListener('change', () => {
-            const d = new Date(dateEl.value);
+        dateInput.addEventListener('change', () => {
+            const d = new Date(dateInput.value);
             if (d.getDay() === 0) {
-                alert("Closed on Sunday. Choose another date.");
-                dateEl.value = '';
-                timeEl.innerHTML = '<option value="">Select</option>';
+                alert("Clinic is closed on Sunday. Please choose another date.");
+                dateInput.value = '';
+                timeSelect.innerHTML = '<option value="">Select slot</option>';
             } else {
-                updateTimes();
+                populateTimes();
             }
         });
 
-        updateTimes();
+        populateTimes();
 
         form.addEventListener('submit', e => {
             e.preventDefault();
             const name = document.getElementById('name').value.trim();
-            const age = document.getElementById('age').value;
+            const age = document.getElementById('age').value.trim();
             const mobile = document.getElementById('mobile').value.trim();
-            const date = dateEl.value;
-            const time = timeEl.value;
-            const problem = document.getElementById('problem').value.trim() || 'Not specified';
+            const date = dateInput.value;
+            const time = timeSelect.value;
+            const problem = document.getElementById('problem').value.trim() || "Not specified";
 
-            if (!date || !time) return alert('Select date and time.');
+            if (!date || !time) return alert("Please select date and time.");
 
             const msg = `Hello Dr. Shweta,%0AName: ${name}%0AAge: ${age}%0AMobile: ${mobile}%0ADate: ${date}%0ATime: ${time}%0AConcern: ${problem}`;
             window.open(`https://wa.me/911126414243?text=${msg}`, '_blank');
