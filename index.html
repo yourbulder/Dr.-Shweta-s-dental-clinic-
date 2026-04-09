@@ -1,286 +1,1162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dr. Shweta's Dental Clinic - Kalkaji, New Delhi. Gentle dental care for families & children.">
-    <title>Dr. Shweta's Dental Clinic | Kalkaji, New Delhi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .heading-font { font-family: 'Playfair Display', sans-serif; }
-        .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-                        url('https://i.ibb.co/kVnF53bh/Screenshot-2026-03-14-10-32-21-602-com-google-android-apps-maps-edit.jpg') center/cover no-repeat;
-            background-attachment: scroll;
-        }
-        .nav-link:hover { color: #0ea5e9; }
-        .service-card:hover { transform: translateY(-8px); transition: all 0.3s; }
-        @media (max-width: 640px) {
-            h2 { font-size: 2.25rem !important; }
-            .text-6xl { font-size: 2.5rem !important; }
-            .py-20 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
-            button, input, select, textarea { font-size: 1.05rem !important; padding: 1rem !important; min-height: 48px; }
-            .nav-icon { font-size: 1.8rem !important; }
-            .gap-6 { gap: 1.25rem !important; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[CLINIC_NAME] – Advanced Dental Care in [CITY] | Pain-Free Treatments</title>
+  <meta name="description" content="[CLINIC_NAME] offers advanced, pain-free dental treatments in [CITY]. Teeth whitening, implants, braces, root canal & more. Rated 5★ by 1000+ happy patients. Book now!" />
+  <meta name="keywords" content="dental clinic [CITY], dentist [CITY], teeth whitening, dental implants, braces, root canal, [CLINIC_NAME]" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sky: { 500: '#0ea5e9', 600: '#0284c7', 400: '#38bdf8' },
+            emerald: { 500: '#10b981', 600: '#059669', 400: '#34d399' },
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body: ['"DM Sans"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #fff; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
+
+    /* --- Navbar --- */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+      padding: 0 1.5rem;
+    }
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 2px 24px rgba(14,165,233,0.10);
+      backdrop-filter: blur(12px);
+    }
+    #navbar.top {
+      background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 100%);
+    }
+
+    /* --- Hero --- */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #e0f2fe 0%, #ecfdf5 50%, #f0f9ff 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 60% 40%, rgba(14,165,233,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 20% 70%, rgba(16,185,129,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #tooth-image {
+      display: block;
+      margin: 0 auto;
+      width: 320px;
+      height: 320px;
+      object-fit: contain;
+      filter: drop-shadow(0 25px 40px rgba(14,165,233,0.28));
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tooth-wrapper:hover #tooth-image {
+      transform: scale(1.08) rotate(4deg);
+    }
+    .glow-ring {
+      position: absolute; inset: -8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .tooth-wrapper:hover .glow-ring { opacity: 1; }
+
+    /* Tooltip */
+    #tooth-tooltip {
+      position: absolute;
+      background: linear-gradient(135deg, #0ea5e9, #10b981);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 4px 20px rgba(14,165,233,0.35);
+    }
+    #tooth-tooltip.show { opacity: 1; transform: translateY(0); }
+
+    /* Trust badges */
+    .trust-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(14,165,233,0.2);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #0369a1;
+      box-shadow: 0 2px 12px rgba(14,165,233,0.10);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Scroll fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Service cards */
+    .service-card {
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1), box-shadow 0.35s;
+      cursor: pointer;
+    }
+    .service-card:hover {
+      transform: translateY(-8px) scale(1.025);
+      box-shadow: 0 20px 48px rgba(14,165,233,0.18);
+    }
+    .service-icon {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, #e0f2fe, #d1fae5);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .service-card:hover .service-icon {
+      background: linear-gradient(135deg, #0ea5e9, #10b981);
+      transform: scale(1.1) rotate(-4deg);
+    }
+
+    /* Team cards */
+    .team-card:hover img { transform: scale(1.05); }
+    .team-card img { transition: transform 0.4s ease; }
+
+    /* Testimonial carousel */
+    #testimonial-track {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+    }
+    .testi-card {
+      min-width: 320px; max-width: 340px;
+      background: #fff;
+      border: 1px solid #e0f2fe;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(14,165,233,0.08);
+      flex-shrink: 0;
+    }
+
+    /* Before/After */
+    .ba-card { position: relative; overflow: hidden; border-radius: 16px; }
+    .ba-card img { transition: transform 0.4s; }
+    .ba-card:hover img { transform: scale(1.04); }
+    .ba-label {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(14,165,233,0.88);
+      color: white; font-size: 0.75rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 999px; letter-spacing: 0.06em;
+    }
+
+    /* Modal */
+    #booking-modal {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(2,30,50,0.55);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s;
+      padding: 16px;
+    }
+    #booking-modal.open { opacity: 1; pointer-events: all; }
+    #modal-box {
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 36px;
+      max-width: 520px; width: 100%;
+      max-height: 92vh; overflow-y: auto;
+      box-shadow: 0 32px 80px rgba(14,165,233,0.22);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    #booking-modal.open #modal-box { transform: translateY(0) scale(1); }
+
+    .form-input {
+      width: 100%;
+      padding: 11px 16px;
+      border: 1.5px solid #e0f2fe;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.93rem;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      outline: none;
+      background: #f8faff;
+      color: #0f172a;
+    }
+    .form-input:focus {
+      border-color: #0ea5e9;
+      box-shadow: 0 0 0 4px rgba(14,165,233,0.10);
+    }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 5px;
+    }
+
+    /* Success */
+    #success-msg {
+      display: none;
+      text-align: center;
+      padding: 24px 0;
+      animation: popIn 0.5s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* CTA Button */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
+      color: white;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 6px 28px rgba(14,165,233,0.28);
+      transition: transform 0.25s, box-shadow 0.25s, filter 0.25s;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(14,165,233,0.36);
+      filter: brightness(1.06);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: white;
+      color: #0ea5e9;
+      font-weight: 700;
+      padding: 13px 30px;
+      border-radius: 999px;
+      border: 2px solid #0ea5e9;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.25s, color 0.25s, transform 0.25s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover {
+      background: #0ea5e9;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Section headings */
+    .section-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, #e0f2fe, #d1fae5);
+      color: #0369a1;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      color: #0f172a;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #0ea5e9, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Mobile nav */
+    #mobile-menu {
+      display: none;
+      position: fixed; top: 72px; left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e0f2fe;
+      padding: 16px 24px 24px;
+      box-shadow: 0 8px 32px rgba(14,165,233,0.12);
+      z-index: 999;
+    }
+    #mobile-menu.open { display: block; }
+    #mobile-menu a {
+      display: block; padding: 10px 0;
+      font-weight: 600; color: #0f172a;
+      border-bottom: 1px solid #f1f5f9;
+      text-decoration: none;
+    }
+
+    /* Pulse animation for CTA */
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .pulse-btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 999px;
+      background: rgba(14,165,233,0.35);
+      animation: pulse-ring 1.8s infinite;
+    }
+    .pulse-btn { position: relative; }
+
+    /* Floating particles */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,0.25), transparent);
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+      50% { transform: translateY(-28px) rotate(180deg); opacity: 1; }
+    }
+
+    /* Wave divider */
+    .wave { overflow: hidden; line-height: 0; }
+    .wave svg { display: block; }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+      border-radius: 16px;
+      min-height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px dashed #7dd3fc;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Hamburger */
+    .hamburger span {
+      display: block; width: 24px; height: 2.5px;
+      background: currentColor; border-radius: 2px;
+      transition: all 0.3s;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Why choose cards */
+    .why-card {
+      background: white;
+      border: 1.5px solid #e0f2fe;
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .why-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(14,165,233,0.15);
+      border-color: #0ea5e9;
+    }
+
+    /* Number stat animation */
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0ea5e9, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f8faff; }
+    ::-webkit-scrollbar-thumb { background: #7dd3fc; border-radius: 99px; }
+
+    @media (max-width: 768px) {
+      #modal-box { padding: 28px 20px; }
+      .testi-card { min-width: 280px; }
+      #tooth-image { width: 260px; height: 260px; }
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-900">
+<body>
 
-    <!-- NAVBAR -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-sky-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">🦷</div>
-                <div>
-                    <h1 class="heading-font text-2xl font-bold text-sky-700">Dr. Shweta's</h1>
-                    <p class="text-xs text-sky-600 -mt-1">DENTAL CLINIC</p>
-                </div>
-            </div>
-            <div class="hidden md:flex items-center gap-8 text-base font-medium">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#hours" class="nav-link">Hours</a>
-                <a href="#book" class="nav-link">Book</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="tel:+911126414243" class="hidden sm:flex items-center gap-2 bg-sky-100 text-sky-700 px-5 py-3 rounded-full font-medium hover:bg-sky-200">
-                    <i class="fas fa-phone nav-icon"></i> Call
-                </a>
-                <a href="https://wa.me/911126414243" target="_blank" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700 flex items-center gap-2">
-                    <i class="fab fa-whatsapp nav-icon"></i>
-                </a>
-                <button id="mobile-btn" class="md:hidden text-4xl text-sky-700">☰</button>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-6 py-6 space-y-5 text-lg font-medium">
-            <a href="#about" class="block">About</a>
-            <a href="#services" class="block">Services</a>
-            <a href="#hours" class="block">Hours</a>
-            <a href="#book" class="block">Book Appointment</a>
-            <a href="#contact" class="block">Contact</a>
-        </div>
-    </nav>
+<!-- ===================== NAVBAR ===================== -->
+<nav id="navbar" class="top">
+  <div class="max-w-7xl mx-auto flex items-center justify-between h-[72px]">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2 text-white" id="nav-logo">
+      <div style="width:38px;height:38px;background:linear-gradient(135deg,#0ea5e9,#10b981);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.5 2 6 4.5 6 8c0 2.5 1 4.5 2.5 6.5S10 18 10 20c0 1.1.9 2 2 2s2-.9 2-2c0-2 1-3.5 2.5-5.5S18 10.5 18 8c0-3.5-2.5-6-6-6z"/></svg>
+      </div>
+      <span style="font-family:'Playfair Display',serif;font-weight:800;font-size:1.25rem;letter-spacing:-0.01em;" id="logo-text">[CLINIC_NAME]</span>
+    </a>
 
-    <!-- HERO -->
-    <header class="hero-bg h-screen flex items-center text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-            <p class="uppercase tracking-wider text-sky-200 text-sm sm:text-base mb-4">Kalkaji, New Delhi</p>
-            <h2 class="heading-font text-5xl sm:text-6xl md:text-7xl font-bold leading-tight mb-6">Your Smile,<br>Our Priority</h2>
-            <p class="text-lg sm:text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Gentle, advanced dental care for families & children. Root Canal • Implants • Braces • Whitening</p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                <a href="#book" class="bg-white text-sky-700 font-bold text-lg sm:text-xl px-10 py-5 sm:py-6 rounded-full hover:bg-sky-50 shadow-xl flex items-center justify-center gap-3 w-full sm:w-auto">
-                    <i class="fas fa-calendar nav-icon"></i> Book Now
-                </a>
-                <a href="https://wa.me/911126414243?text=Hello%20Dr.%20Shweta..." target="_blank" class="border-2 border-white text-white font-bold text-lg sm:text-xl px-10 py-5 sm:py-6 rounded-full hover:bg-white hover:text-sky-700 flex items-center justify-center gap-3 w-full sm:w-auto">
-                    <i class="fab fa-whatsapp nav-icon"></i> WhatsApp Us
-                </a>
-            </div>
-            <div class="mt-12 flex flex-wrap justify-center gap-8 text-sm sm:text-base">
-                <div class="flex items-center gap-3 bg-white/20 px-6 py-3 rounded-full">
-                    <div class="flex text-yellow-400 text-2xl">★★★★★</div>
-                    <span>4.6 (100+ reviews)</span>
-                </div>
-                <div class="bg-white/20 px-6 py-3 rounded-full">D-42, Post Office Marg, Kalkaji, 110019</div>
-            </div>
-        </div>
-    </header>
+    <!-- Desktop nav links -->
+    <div class="hidden md:flex items-center gap-6" id="nav-links">
+      <a href="#services" class="nav-link font-semibold text-sm hover:text-sky-400 transition-colors">Services</a>
+      <a href="#about" class="nav-link font-semibold text-sm hover:text-sky-400 transition-colors">About</a>
+      <a href="#dentists" class="nav-link font-semibold text-sm hover:text-sky-400 transition-colors">Our Dentists</a>
+      <a href="#testimonials" class="nav-link font-semibold text-sm hover:text-sky-400 transition-colors">Reviews</a>
+      <a href="#contact" class="nav-link font-semibold text-sm hover:text-sky-400 transition-colors">Contact</a>
+    </div>
 
-    <!-- ABOUT -->
-    <section id="about" class="py-16 sm:py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <span class="bg-sky-100 text-sky-700 px-5 py-2 rounded-full text-sm font-semibold">15+ Years of Trusted Care</span>
-                    <h2 class="heading-font text-4xl sm:text-5xl font-bold mt-6 leading-tight">Dr. Shweta's Dental Clinic</h2>
-                    <p class="mt-8 text-base sm:text-lg leading-relaxed text-gray-700">
-                        We provide painless, high-quality dental treatments in a warm, child-friendly environment in South Delhi.
-                    </p>
-                </div>
-                <div class="rounded-3xl overflow-hidden shadow-2xl">
-                    <img src="https://i.ibb.co/HD59cns8/Screenshot-2026-03-14-10-32-39-460-com-google-android-apps-maps-edit.jpg" alt="Clinic team & interior" class="w-full">
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- CTA group -->
+    <div class="hidden md:flex items-center gap-3">
+      <a href="tel:[MOBILE_NUMBER]" class="flex items-center gap-2 font-semibold text-sm px-4 py-2 rounded-full border border-current hover:bg-white hover:text-sky-500 transition-all" id="nav-phone">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.18a16 16 0 006.29 6.29l1.71-1.71a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        [MOBILE_NUMBER]
+      </a>
+      <button onclick="openModal()" class="btn-primary py-2.5 px-5 text-sm">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Now
+      </button>
+    </div>
 
-    <!-- SERVICES -->
-    <section id="services" class="py-16 sm:py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <h2 class="heading-font text-4xl sm:text-5xl font-bold text-center mb-12">Our Services</h2>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                <div class="service-card bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
-                    <div class="text-6xl mb-4">🦷</div>
-                    <h3 class="text-xl sm:text-2xl font-bold">Root Canal</h3>
-                    <p class="mt-3 text-gray-600">Painless single-visit treatment</p>
-                </div>
-                <div class="service-card bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
-                    <div class="text-6xl mb-4">🔩</div>
-                    <h3 class="text-xl sm:text-2xl font-bold">Dental Implants</h3>
-                    <p class="mt-3 text-gray-600">Permanent & natural-looking</p>
-                </div>
-                <div class="service-card bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
-                    <div class="text-6xl mb-4">😁</div>
-                    <h3 class="text-xl sm:text-2xl font-bold">Braces & Aligners</h3>
-                    <p class="mt-3 text-gray-600">For beautiful straight teeth</p>
-                </div>
-                <div class="service-card bg-white p-6 sm:p-8 rounded-3xl shadow-lg border border-gray-100 text-center">
-                    <div class="text-6xl mb-4">✨</div>
-                    <h3 class="text-xl sm:text-2xl font-bold">Teeth Whitening</h3>
-                    <p class="mt-3 text-gray-600">Instant brighter smile</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Hamburger -->
+    <button class="hamburger flex flex-col gap-[5px] md:hidden p-2" id="hamburger" onclick="toggleMobileMenu()" style="color:white;" id="ham-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <!-- HOURS -->
-    <section id="hours" class="py-16 sm:py-20 bg-sky-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6">
-            <h2 class="heading-font text-4xl sm:text-5xl font-bold text-center mb-10">Clinic Timings</h2>
-            <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
-                <table class="w-full text-base sm:text-lg">
-                    <thead class="bg-sky-700 text-white">
-                        <tr>
-                            <th class="py-6 px-8 text-left">Day</th>
-                            <th class="py-6 px-8 text-left">Timings</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y">
-                        <tr><td class="py-6 px-8 font-medium">Monday – Saturday</td><td class="py-6 px-8">9:00 AM – 1:00 PM<br>4:00 PM – 7:00 PM</td></tr>
-                        <tr class="bg-red-50"><td class="py-6 px-8 font-medium text-red-700">Sunday</td><td class="py-6 px-8 text-red-700">Closed</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+<!-- Mobile Menu -->
+<div id="mobile-menu">
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#dentists" onclick="closeMobileMenu()">Our Dentists</a>
+  <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <div class="mt-4 flex flex-col gap-3">
+    <a href="tel:[MOBILE_NUMBER]" class="btn-secondary justify-center">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.18a16 16 0 006.29 6.29l1.71-1.71a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+      Call [MOBILE_NUMBER]
+    </a>
+    <button onclick="openModal();closeMobileMenu();" class="btn-primary justify-center">Book Appointment</button>
+  </div>
+</div>
 
-    <!-- BOOKING FORM -->
-    <section id="book" class="py-16 sm:py-20 bg-white">
-        <div class="max-w-2xl mx-auto px-4 sm:px-6">
-            <h2 class="heading-font text-4xl sm:text-5xl font-bold text-center mb-10">Book Your Appointment</h2>
-            <form id="booking-form" class="bg-white shadow-2xl rounded-3xl p-6 sm:p-10 border border-gray-200">
-                <div class="grid sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block font-medium mb-2">Full Name</label>
-                        <input id="name" type="text" required class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block font-medium mb-2">Age</label>
-                        <input id="age" type="number" required min="1" class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <label class="block font-medium mb-2">Mobile Number</label>
-                    <input id="mobile" type="tel" required class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
-                </div>
-                <div class="grid sm:grid-cols-2 gap-6 mt-6">
-                    <div>
-                        <label class="block font-medium mb-2">Preferred Date</label>
-                        <input id="date" type="date" required class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block font-medium mb-2">Preferred Time</label>
-                        <select id="time" required class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none">
-                            <option value="">Select slot</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <label class="block font-medium mb-2">Problem / Concern</label>
-                    <textarea id="problem" rows="3" class="w-full px-5 py-4 border rounded-2xl focus:border-sky-500 focus:outline-none"></textarea>
-                </div>
-                <button type="submit" class="mt-10 w-full bg-green-600 text-white font-bold py-5 rounded-2xl hover:bg-green-700 flex items-center justify-center gap-3 text-lg">
-                    <i class="fab fa-whatsapp text-2xl"></i> Send to WhatsApp
-                </button>
-            </form>
-        </div>
-    </section>
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <!-- Particles -->
+  <div class="particle" style="width:120px;height:120px;top:10%;left:5%;animation-delay:0s;"></div>
+  <div class="particle" style="width:80px;height:80px;top:60%;right:8%;animation-delay:2s;"></div>
+  <div class="particle" style="width:60px;height:60px;top:30%;right:20%;animation-delay:4s;"></div>
+  <div class="particle" style="width:90px;height:90px;bottom:15%;left:15%;animation-delay:1s;"></div>
 
-    <!-- CONTACT & MAP -->
-    <section id="contact" class="py-16 sm:py-20 bg-sky-700 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12">
+  <div class="max-w-6xl mx-auto px-6 pt-28 pb-16 flex flex-col items-center text-center relative z-10">
+    <!-- Tag -->
+    <div class="section-tag mb-4">✦ Trusted Dental Care in [CITY]</div>
+
+    <!-- Headline -->
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,4.2rem);font-weight:800;line-height:1.12;color:#0f172a;max-width:800px;" class="mb-5">
+      Transform Your Smile at<br>
+      <span class="gradient-text">[CLINIC_NAME]</span>
+    </h1>
+    <p style="font-size:clamp(1rem,2vw,1.2rem);color:#475569;max-width:560px;line-height:1.7;" class="mb-10">
+      Advanced dental care with compassionate experts in <strong>[CITY]</strong>. Pain-free treatments, stunning results — and a smile you'll love for life.
+    </p>
+
+    <!-- CUTE 3D TOOTH IMAGE (ONLY THIS IS CHANGED) -->
+    <div class="tooth-wrapper relative" style="width:320px;height:320px;display:flex;align-items:center;justify-content:center;">
+      <div class="glow-ring"></div>
+      <img 
+        id="tooth-image" 
+        src="https://i.ibb.co/W4hhQDD3/Pngtree-3d-cute-tooth-on-transparent-16493694.png" 
+        alt="Cute 3D Tooth" 
+        width="320" 
+        height="320"
+      >
+      <div id="tooth-tooltip">🦷 Healthy enamel starts here</div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap gap-4 justify-center mt-8 mb-10">
+      <button onclick="openModal()" class="btn-primary pulse-btn text-base">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Your Appointment Now
+      </button>
+      <a href="tel:[MOBILE_NUMBER]" class="btn-secondary text-base">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.18a16 16 0 006.29 6.29l1.71-1.71a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        Call Now: [MOBILE_NUMBER]
+      </a>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="flex flex-wrap gap-3 justify-center">
+      <span class="trust-badge">⭐ 5.0 Google Reviews</span>
+      <span class="trust-badge">😊 1000+ Happy Smiles</span>
+      <span class="trust-badge">🔬 Advanced Technology</span>
+      <span class="trust-badge">🏥 Govt. Certified Clinic</span>
+    </div>
+  </div>
+
+  <!-- Wave divider -->
+  <div class="wave">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;">
+      <path fill="#ffffff" d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===================== STATS STRIP ===================== -->
+<section class="bg-white py-10">
+  <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div class="fade-in">
+      <div class="stat-number">1000+</div>
+      <div class="text-slate-500 text-sm font-semibold mt-1">Happy Patients</div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.1s">
+      <div class="stat-number">15+</div>
+      <div class="text-slate-500 text-sm font-semibold mt-1">Years Experience</div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.2s">
+      <div class="stat-number">5.0★</div>
+      <div class="text-slate-500 text-sm font-semibold mt-1">Google Rating</div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.3s">
+      <div class="stat-number">12+</div>
+      <div class="text-slate-500 text-sm font-semibold mt-1">Services Offered</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services" class="py-20 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-14 fade-in">
+      <div class="section-tag">Our Services</div>
+      <h2 class="section-title mt-2">Complete Dental Care<br><span class="gradient-text">Under One Roof</span></h2>
+      <p class="text-slate-500 mt-4 max-w-lg mx-auto">From routine cleanings to complex implants — we offer everything your family needs for a lifetime of healthy smiles.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="service-card fade-in bg-white rounded-2xl p-7 border border-slate-100 shadow-sm" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <div class="service-icon">🦷</div>
+        <h3 class="font-bold text-lg text-slate-800 mb-2">Teeth Cleaning</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Professional deep cleaning to remove plaque, tartar & stains for fresher breath and healthier gums.</p>
+        <div class="mt-4 text-sky-500 font-semibold text-sm flex items-center gap-1">Learn More →</div>
+      </div>
+      <div class="service-card fade-in bg-white rounded-2xl p-7 border border-slate-100 shadow-sm" style="transition-delay:0.05s" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <div class="service-icon">✨</div>
+        <h3 class="font-bold text-lg text-slate-800 mb-2">Teeth Whitening</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Advanced laser & gel whitening for up to 8 shades brighter smile in a single session.</p>
+        <div class="mt-4 text-sky-500 font-semibold text-sm">Learn More →</div>
+      </div>
+      <div class="service-card fade-in bg-white rounded-2xl p-7 border border-slate-100 shadow-sm" style="transition-delay:0.1s" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <div class="service-icon">🔩</div>
+        <h3 class="font-bold text-lg text-slate-800 mb-2">Dental Implants</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Permanent, natural-looking tooth replacements with titanium implants. Restore your full smile.</p>
+        <div class="mt-4 text-sky-500 font-semibold text-sm">Learn More →</div>
+      </div>
+      <div class="service-card fade-in bg-white rounded-2xl p-7 border border-slate-100 shadow-sm" style="transition-delay:0.15s" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <div class="service-icon">😬</div>
+        <h3 class="font-bold text-lg text-slate-800 mb-2">Braces & Aligners</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Traditional metal, ceramic & invisible clear aligners to straighten teeth comfortably & effectively.</p>
+        <div class="mt-4 text-sky-500 font-semibold text-sm">Learn More →</div>
+      </div>
+      <div class="service-card fade-in bg-white rounded-2xl p-7 border border-slate-100 shadow-sm" style="transition-delay:0.2s" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <div class="service-icon">💉</div>
+        <h3 class="font-bold text-lg text-slate-800 mb-2">Root Canal</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Pain-free, single-session root canals using advanced rotary instruments and digital X-rays.</p>
+        <div class="mt-4 text-sky-500 font-semibold text-sm">Learn More →</div>
+      </div>
+      <div class="service-card fade-in bg-white rounded-2xl p-7 border border-slate-100 shadow-sm" style="transition-delay:0.25s" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        <div class="service-icon">👶</div>
+        <h3 class="font-bold text-lg text-slate-800 mb-2">Pediatric Dentistry</h3>
+        <p class="text-slate-500 text-sm leading-relaxed">Child-friendly dental care in a warm, playful environment. Build healthy habits from day one.</p>
+        <div class="mt-4 text-sky-500 font-semibold text-sm">Learn More →</div>
+      </div>
+    </div>
+    <div class="text-center mt-10 fade-in">
+      <button onclick="openModal()" class="btn-primary">Book a Consultation →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY CHOOSE US ===================== -->
+<section class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-14 fade-in">
+      <div class="section-tag">Why [CLINIC_NAME]</div>
+      <h2 class="section-title mt-2">Why Thousands Choose<br><span class="gradient-text">Us for Their Smile</span></h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+      <div class="why-card fade-in">
+        <div class="text-4xl mb-4">💊</div>
+        <h4 class="font-bold text-slate-800 mb-2">100% Pain-Free</h4>
+        <p class="text-slate-500 text-sm">Latest anaesthesia techniques ensure zero discomfort during all procedures.</p>
+      </div>
+      <div class="why-card fade-in" style="transition-delay:0.08s">
+        <div class="text-4xl mb-4">🔬</div>
+        <h4 class="font-bold text-slate-800 mb-2">Latest Technology</h4>
+        <p class="text-slate-500 text-sm">Digital X-rays, 3D scanning & laser dentistry for precise, faster treatments.</p>
+      </div>
+      <div class="why-card fade-in" style="transition-delay:0.16s">
+        <div class="text-4xl mb-4">👨‍⚕️</div>
+        <h4 class="font-bold text-slate-800 mb-2">Expert Dentists</h4>
+        <p class="text-slate-500 text-sm">MDS qualified specialists with 15+ years of combined clinical experience.</p>
+      </div>
+      <div class="why-card fade-in" style="transition-delay:0.24s">
+        <div class="text-4xl mb-4">💰</div>
+        <h4 class="font-bold text-slate-800 mb-2">Affordable Plans</h4>
+        <p class="text-slate-500 text-sm">Flexible EMI options & transparent pricing with no hidden charges.</p>
+      </div>
+      <div class="why-card fade-in" style="transition-delay:0.32s">
+        <div class="text-4xl mb-4">🚨</div>
+        <h4 class="font-bold text-slate-800 mb-2">24/7 Emergency</h4>
+        <p class="text-slate-500 text-sm">Round-the-clock emergency dental care. Call us anytime — we're here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="py-20" style="background:linear-gradient(135deg,#f0f9ff 0%,#f0fdf4 100%)">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center">
+    <div class="fade-in">
+      <div class="section-tag">Our Story</div>
+      <h2 class="section-title mt-3 mb-5">Caring for Smiles in<br><span class="gradient-text">[CITY] Since 2008</span></h2>
+      <p class="text-slate-600 leading-relaxed mb-4">
+        [CLINIC_NAME] was founded with a single mission: to make world-class dental care accessible to every family in [CITY]. What began as a small clinic with big dreams has grown into one of the most trusted dental practices in the region — all because of the trust our patients place in us.
+      </p>
+      <p class="text-slate-600 leading-relaxed mb-6">
+        We believe that a healthy smile is the foundation of confidence. Our team of expert dentists combines compassionate care with the most advanced dental technology available — so every visit is comfortable, efficient, and effective.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <button onclick="openModal()" class="btn-primary">Book a Visit</button>
+        <a href="tel:[MOBILE_NUMBER]" class="btn-secondary">Call Us Now</a>
+      </div>
+    </div>
+    <div class="fade-in" style="transition-delay:0.15s">
+      <div style="position:relative;">
+        <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=600&q=80&auto=format" alt="Modern dental clinic interior" style="width:100%;border-radius:24px;box-shadow:0 20px 60px rgba(14,165,233,0.18);" loading="lazy"/>
+        <div style="position:absolute;bottom:-20px;left:-20px;background:white;border-radius:16px;padding:16px 20px;box-shadow:0 8px 32px rgba(0,0,0,0.12);">
+          <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;background:linear-gradient(135deg,#0ea5e9,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">15+</div>
+          <div style="font-size:0.82rem;font-weight:600;color:#64748b;">Years of Excellence</div>
+        </div>
+        <div style="position:absolute;top:-16px;right:-16px;background:linear-gradient(135deg,#0ea5e9,#10b981);border-radius:14px;padding:14px 18px;box-shadow:0 8px 24px rgba(14,165,233,0.3);color:white;">
+          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;">5.0★</div>
+          <div style="font-size:0.78rem;font-weight:600;opacity:0.9;">Google Rating</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DENTISTS ===================== -->
+<section id="dentists" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-14 fade-in">
+      <div class="section-tag">Meet The Team</div>
+      <h2 class="section-title mt-2">Our <span class="gradient-text">Expert Dentists</span></h2>
+      <p class="text-slate-500 mt-4 max-w-md mx-auto">Highly qualified, compassionate specialists dedicated to your dental health and comfort.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="team-card fade-in text-center bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition-shadow">
+        <div style="overflow:hidden;height:240px;">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&q=80" alt="Dr. Aryan Sharma" style="width:100%;height:100%;object-fit:cover;" loading="lazy"/>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg text-slate-800">Dr. Aryan Sharma</h3>
+          <p class="text-sky-500 font-semibold text-sm mt-1">Chief Dentist & Implantologist</p>
+          <p class="text-slate-500 text-sm mt-3">MDS, 12 years experience. Specialist in implants, smile design & restorative dentistry.</p>
+          <div class="flex gap-1 justify-center mt-3 text-yellow-400">★★★★★</div>
+        </div>
+      </div>
+      <div class="team-card fade-in text-center bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition-shadow" style="transition-delay:0.1s">
+        <div style="overflow:hidden;height:240px;">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&q=80" alt="Dr. Priya Nair" style="width:100%;height:100%;object-fit:cover;" loading="lazy"/>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg text-slate-800">Dr. Priya Nair</h3>
+          <p class="text-sky-500 font-semibold text-sm mt-1">Orthodontist & Cosmetic Specialist</p>
+          <p class="text-slate-500 text-sm mt-3">MDS Orthodontics, 9 years experience. Expert in braces, aligners & cosmetic smile correction.</p>
+          <div class="flex gap-1 justify-center mt-3 text-yellow-400">★★★★★</div>
+        </div>
+      </div>
+      <div class="team-card fade-in text-center bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl transition-shadow" style="transition-delay:0.2s">
+        <div style="overflow:hidden;height:240px;">
+          <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&q=80" alt="Dr. Rahul Mehta" style="width:100%;height:100%;object-fit:cover;" loading="lazy"/>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg text-slate-800">Dr. Rahul Mehta</h3>
+          <p class="text-sky-500 font-semibold text-sm mt-1">Endodontist & Oral Surgeon</p>
+          <p class="text-slate-500 text-sm mt-3">BDS, MDS Endodontics, 8 years experience. Painless root canals & complex oral surgery specialist.</p>
+          <div class="flex gap-1 justify-center mt-3 text-yellow-400">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section id="testimonials" style="background:linear-gradient(135deg,#e0f2fe 0%,#dcfce7 100%);padding:80px 0;">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-14 fade-in">
+      <div class="section-tag">Patient Stories</div>
+      <h2 class="section-title mt-2">What Our Patients<br><span class="gradient-text">Say About Us</span></h2>
+    </div>
+    <div style="overflow:hidden;position:relative;">
+      <div id="testimonial-track">
+        <div class="testi-card">
+          <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">"I was terrified of dentists but the team at [CLINIC_NAME] made me feel so comfortable. My root canal was completely pain-free! Best clinic in [CITY] hands down."</p>
+          <div class="flex items-center gap-3 mt-5">
+            <img src="https://i.pravatar.cc/48?img=1" alt="Kavita S" class="rounded-full w-10 h-10" loading="lazy"/>
+            <div><div class="font-bold text-sm text-slate-800">Kavita Srivastava</div><div class="text-xs text-slate-400">Root Canal Patient, [CITY]</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">"Got my teeth whitened here — the results are incredible! 7 shades brighter in just one session. Highly recommend Dr. Priya!"</p>
+          <div class="flex items-center gap-3 mt-5">
+            <img src="https://i.pravatar.cc/48?img=5" alt="Rajan" class="rounded-full w-10 h-10" loading="lazy"/>
+            <div><div class="font-bold text-sm text-slate-800">Rajan Verma</div><div class="text-xs text-slate-400">Whitening Patient, [CITY]</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">"My daughter has been coming here since she was 3. The pediatric care is exceptional!"</p>
+          <div class="flex items-center gap-3 mt-5">
+            <img src="https://i.pravatar.cc/48?img=9" alt="Sunita" class="rounded-full w-10 h-10" loading="lazy"/>
+            <div><div class="font-bold text-sm text-slate-800">Sunita Kumari</div><div class="text-xs text-slate-400">Parent, [CITY]</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">"I got dental implants after years of self-consciousness. Life-changing!"</p>
+          <div class="flex items-center gap-3 mt-5">
+            <img src="https://i.pravatar.cc/48?img=12" alt="Amit" class="rounded-full w-10 h-10" loading="lazy"/>
+            <div><div class="font-bold text-sm text-slate-800">Amit Pathak</div><div class="text-xs text-slate-400">Implant Patient, [CITY]</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">"Emergency dental pain at midnight — [CLINIC_NAME] was the only clinic to respond."</p>
+          <div class="flex items-center gap-3 mt-5">
+            <img src="https://i.pravatar.cc/48?img=20" alt="Pooja" class="rounded-full w-10 h-10" loading="lazy"/>
+            <div><div class="font-bold text-sm text-slate-800">Pooja Gupta</div><div class="text-xs text-slate-400">Emergency Patient, [CITY]</div></div>
+          </div>
+        </div>
+        <!-- Clones for seamless loop -->
+        <div class="testi-card">
+          <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">"I was terrified of dentists but the team at [CLINIC_NAME] made me feel so comfortable. My root canal was completely pain-free! Best clinic in [CITY] hands down."</p>
+          <div class="flex items-center gap-3 mt-5">
+            <img src="https://i.pravatar.cc/48?img=1" alt="Kavita S" class="rounded-full w-10 h-10" loading="lazy"/>
+            <div><div class="font-bold text-sm text-slate-800">Kavita Srivastava</div><div class="text-xs text-slate-400">Root Canal Patient, [CITY]</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="flex gap-1 text-yellow-400 text-lg mb-3">★★★★★</div>
+          <p class="text-slate-600 text-sm leading-relaxed italic">"Got my teeth whitened here — the results are incredible! 7 shades brighter in just one session. Highly recommend Dr. Priya!"</p>
+          <div class="flex items-center gap-3 mt-5">
+            <img src="https://i.pravatar.cc/48?img=5" alt="Rajan" class="rounded-full w-10 h-10" loading="lazy"/>
+            <div><div class="font-bold text-sm text-slate-800">Rajan Verma</div><div class="text-xs text-slate-400">Whitening Patient, [CITY]</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center gap-2 mt-8" id="testi-dots"></div>
+  </div>
+</section>
+
+<!-- ===================== BEFORE & AFTER ===================== -->
+<section class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-14 fade-in">
+      <div class="section-tag">Real Results</div>
+      <h2 class="section-title mt-2">Before & After<br><span class="gradient-text">Smile Transformations</span></h2>
+      <p class="text-slate-500 mt-4 max-w-md mx-auto">Real patients, real results. See the difference expert dental care makes.</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="ba-card fade-in">
+        <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=300&h=300&fit=crop&q=80" alt="Smile transformation 1" class="w-full h-48 object-cover" loading="lazy"/>
+        <div class="ba-label">After</div>
+      </div>
+      <div class="ba-card fade-in" style="transition-delay:0.1s">
+        <img src="https://images.unsplash.com/photo-1623854767648-e7bb8009f0db?w=300&h=300&fit=crop&q=80" alt="Smile transformation 2" class="w-full h-48 object-cover" loading="lazy"/>
+        <div class="ba-label">After</div>
+      </div>
+      <div class="ba-card fade-in" style="transition-delay:0.2s">
+        <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=300&h=300&fit=crop&q=80" alt="Smile transformation 3" class="w-full h-48 object-cover" loading="lazy"/>
+        <div class="ba-label">After</div>
+      </div>
+      <div class="ba-card fade-in" style="transition-delay:0.3s">
+        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=300&h=300&fit=crop&q=80" alt="Smile transformation 4" class="w-full h-48 object-cover" loading="lazy"/>
+        <div class="ba-label">After</div>
+      </div>
+    </div>
+    <div class="text-center mt-10 fade-in">
+      <button onclick="openModal()" class="btn-primary">Get Your Smile Transformation →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" style="background:linear-gradient(135deg,#f0f9ff,#f0fdf4);padding:80px 0;">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+    <div class="fade-in">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title mt-3 mb-6">Book Your Visit or<br><span class="gradient-text">Ask Us Anything</span></h2>
+      <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+        <div id="contact-form-area">
+          <div class="grid grid-cols-2 gap-4 mb-4">
             <div>
-                <h2 class="heading-font text-4xl sm:text-5xl font-bold mb-8">Visit Us</h2>
-                <div class="space-y-6 text-lg">
-                    <div class="flex gap-5 items-start">
-                        <i class="fas fa-map-marker-alt text-4xl mt-1"></i>
-                        <div>D-42, Post Office Marg<br>Block D, Kalkaji<br>New Delhi, Delhi 110019</div>
-                    </div>
-                    <div class="flex gap-5 items-start">
-                        <i class="fas fa-phone text-4xl mt-1"></i>
-                        <div>
-                            <a href="tel:+911126414243" class="text-2xl hover:underline">+91 11 2641 4243</a>
-                        </div>
-                    </div>
-                </div>
+              <label class="form-label">Your Name *</label>
+              <input class="form-input" type="text" placeholder="Full Name" id="cf-name"/>
             </div>
-            <div class="rounded-3xl overflow-hidden shadow-2xl">
-                <iframe width="100%" height="350" style="border:0;" allowfullscreen loading="lazy"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.5!2d77.269!3d28.548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce!2sD-42%2C%20Kalkaji%2C%20New%20Delhi!5e0!3m2!1sen!2sin"></iframe>
+            <div>
+              <label class="form-label">Phone *</label>
+              <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX" id="cf-phone"/>
             </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label">Service Needed</label>
+            <select class="form-input" id="cf-service">
+              <option value="">Select a service...</option>
+              <option>Teeth Cleaning</option>
+              <option>Teeth Whitening</option>
+              <option>Dental Implants</option>
+              <option>Braces / Aligners</option>
+              <option>Root Canal</option>
+              <option>Pediatric Dentistry</option>
+              <option>Emergency Care</option>
+              <option>Others</option>
+            </select>
+          </div>
+          <div class="mb-5">
+            <label class="form-label">Message</label>
+            <textarea class="form-input" rows="3" placeholder="Briefly describe your concern..." id="cf-msg"></textarea>
+          </div>
+          <button class="btn-primary w-full justify-center" onclick="submitContactForm()">Send Message →</button>
         </div>
-    </section>
+        <div id="contact-success" style="display:none;text-align:center;padding:24px 0;">
+          <div style="font-size:3rem;margin-bottom:8px;">✅</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#0f172a;margin-bottom:6px;">Message Received!</div>
+          <p style="color:#64748b;font-size:0.9rem;">We'll call you shortly on <strong>[MOBILE_NUMBER]</strong></p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 mt-5">
+        <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-4 border border-slate-100">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,#e0f2fe,#d1fae5);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">📞</div>
+          <div><div class="font-bold text-sm text-slate-700">Phone / WhatsApp</div><a href="tel:[MOBILE_NUMBER]" class="text-sky-500 font-semibold text-sm">[MOBILE_NUMBER]</a></div>
+        </div>
+        <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-4 border border-slate-100">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,#e0f2fe,#d1fae5);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">📍</div>
+          <div><div class="font-bold text-sm text-slate-700">Location</div><div class="text-slate-500 text-sm">[CITY], Bihar, India</div></div>
+        </div>
+        <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-4 border border-slate-100">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,#e0f2fe,#d1fae5);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;">🕐</div>
+          <div><div class="font-bold text-sm text-slate-700">Working Hours</div><div class="text-slate-500 text-sm">Mon–Sat: 9am–8pm &nbsp;|&nbsp; Sun: 10am–3pm</div></div>
+        </div>
+      </div>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-gray-900 text-white py-12 text-center">
-        <p class="text-2xl font-medium">Dr. Shweta's Dental Clinic</p>
-        <p class="mt-4 text-gray-400">© 2026 • All Rights Reserved</p>
-    </footer>
+    <div class="fade-in" style="transition-delay:0.15s">
+      <div class="map-placeholder fade-in" style="height:320px;">
+        <div style="text-align:center;">
+          <div style="font-size:3rem;margin-bottom:8px;">📍</div>
+          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:#0369a1;">[CLINIC_NAME]</div>
+          <p style="color:#64748b;font-size:0.88rem;margin-top:4px;">[CITY], Bihar, India</p>
+          <a href="https://maps.google.com/?q=[CLINIC_NAME]+[CITY]+Bihar+India" target="_blank" class="btn-primary mt-5 inline-flex" style="font-size:0.85rem;padding:10px 20px;">
+            Open in Google Maps
+          </a>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm mt-5">
+        <div class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+          <span>⚡</span> Emergency? Call Now
+        </div>
+        <p class="text-slate-500 text-sm mb-4">Dental emergencies don't wait. We're available round the clock for urgent cases.</p>
+        <a href="tel:[MOBILE_NUMBER]" class="btn-primary w-full justify-center text-sm">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.18a16 16 0 006.29 6.29l1.71-1.71a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          Call [MOBILE_NUMBER] — 24/7
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-btn').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#0f172a;color:white;padding:60px 24px 24px;">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,#38bdf8,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;">[CLINIC_NAME]</div>
+        <p style="color:#94a3b8;font-size:0.9rem;line-height:1.7;max-width:320px;">Advanced dental care with heart. Serving families in [CITY] & beyond with the latest treatments and genuine compassion since 2008.</p>
+        <div class="flex gap-3 mt-5">
+          <a href="tel:[MOBILE_NUMBER]" style="background:linear-gradient(135deg,#0ea5e9,#10b981);color:white;padding:9px 20px;border-radius:999px;font-weight:700;font-size:0.85rem;text-decoration:none;">📞 [MOBILE_NUMBER]</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:0.9rem;color:#e2e8f0;margin-bottom:14px;letter-spacing:0.05em;text-transform:uppercase;">Quick Links</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="#services" style="color:#94a3b8;font-size:0.88rem;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#94a3b8'">Services</a>
+          <a href="#about" style="color:#94a3b8;font-size:0.88rem;text-decoration:none;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#94a3b8'">About Us</a>
+          <a href="#dentists" style="color:#94a3b8;font-size:0.88rem;text-decoration:none;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#94a3b8'">Our Dentists</a>
+          <a href="#testimonials" style="color:#94a3b8;font-size:0.88rem;text-decoration:none;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#94a3b8'">Reviews</a>
+          <a href="#contact" style="color:#94a3b8;font-size:0.88rem;text-decoration:none;" onmouseover="this.style.color='#38bdf8'" onmouseout="this.style.color='#94a3b8'">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:0.9rem;color:#e2e8f0;margin-bottom:14px;letter-spacing:0.05em;text-transform:uppercase;">Services</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <span style="color:#94a3b8;font-size:0.88rem;">Teeth Cleaning</span>
+          <span style="color:#94a3b8;font-size:0.88rem;">Teeth Whitening</span>
+          <span style="color:#94a3b8;font-size:0.88rem;">Dental Implants</span>
+          <span style="color:#94a3b8;font-size:0.88rem;">Braces & Aligners</span>
+          <span style="color:#94a3b8;font-size:0.88rem;">Root Canal</span>
+          <span style="color:#94a3b8;font-size:0.88rem;">Pediatric Dentistry</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1e293b;padding-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+      <div style="color:#64748b;font-size:0.82rem;">© 2024 [CLINIC_NAME], [CITY]. All rights reserved.</div>
+      <div style="color:#64748b;font-size:0.82rem;">⭐ Find us on <a href="https://business.google.com" target="_blank" style="color:#38bdf8;text-decoration:none;">Google Business Profile</a></div>
+    </div>
+  </div>
+</footer>
 
-        // Booking form WhatsApp
-        const form = document.getElementById('booking-form');
-        const dateInput = document.getElementById('date');
-        const timeSelect = document.getElementById('time');
+<!-- ===================== BOOKING MODAL ===================== -->
+<div id="booking-modal" onclick="handleModalClick(event)">
+  <div id="modal-box">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:800;color:#0f172a;">Book Appointment</h2>
+        <p style="color:#64748b;font-size:0.85rem;margin-top:2px;">Fill in your details — we'll confirm within 30 min!</p>
+      </div>
+      <button onclick="closeModal()" style="width:36px;height:36px;border-radius:50%;background:#f1f5f9;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#64748b;transition:background 0.2s;" onmouseover="this.style.background='#e0f2fe'" onmouseout="this.style.background='#f1f5f9'">✕</button>
+    </div>
 
-        dateInput.min = new Date().toISOString().split('T')[0];
+    <div id="modal-form">
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="form-label">Full Name *</label>
+          <input class="form-input" type="text" placeholder="Your Name" id="m-name"/>
+        </div>
+        <div>
+          <label class="form-label">Phone *</label>
+          <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX" id="m-phone"/>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="you@email.com" id="m-email"/>
+      </div>
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="form-label">Preferred Date *</label>
+          <input class="form-input" type="date" id="m-date"/>
+        </div>
+        <div>
+          <label class="form-label">Preferred Time</label>
+          <select class="form-input" id="m-time">
+            <option value="">Select time...</option>
+            <option>9:00 AM</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>2:00 PM</option>
+            <option>3:00 PM</option>
+            <option>4:00 PM</option>
+            <option>5:00 PM</option>
+            <option>6:00 PM</option>
+            <option>7:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label class="form-label">Service Required *</label>
+        <select class="form-input" id="m-service">
+          <option value="">Select a service...</option>
+          <option>Teeth Cleaning</option>
+          <option>Teeth Whitening</option>
+          <option>Dental Implants</option>
+          <option>Braces / Clear Aligners</option>
+          <option>Root Canal Treatment</option>
+          <option>Pediatric Dentistry</option>
+          <option>Emergency Care</option>
+          <option>Smile Makeover Consultation</option>
+          <option>Others</option>
+        </select>
+      </div>
+      <div class="mb-5">
+        <label class="form-label">Additional Message</label>
+        <textarea class="form-input" rows="2" placeholder="Any specific concern or question?" id="m-msg"></textarea>
+      </div>
+      <button class="btn-primary w-full justify-center" onclick="submitBooking()">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Confirm Appointment
+      </button>
+      <p style="color:#94a3b8;font-size:0.75rem;text-align:center;margin-top:10px;">🔒 Your data is safe. We never share your info.</p>
+    </div>
 
-        const timeSlots = ["09:00 AM","09:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 PM","12:30 PM",
-                           "04:00 PM","04:30 PM","05:00 PM","05:30 PM","06:00 PM","06:30 PM"];
+    <div id="success-msg">
+      <div style="font-size:4rem;margin-bottom:10px;">🎉</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;color:#0f172a;margin-bottom:8px;">You're All Set!</div>
+      <p style="color:#64748b;line-height:1.7;font-size:0.95rem;">Your appointment request has been received!<br>We will call you shortly on <strong style="color:#0ea5e9;">[MOBILE_NUMBER]</strong><br>to confirm your slot.</p>
+      <button onclick="closeModal()" class="btn-primary mt-5 mx-auto" style="display:inline-flex;">Close</button>
+    </div>
+  </div>
+</div>
 
-        function populateTimes() {
-            timeSelect.innerHTML = '<option value="">Select slot</option>';
-            timeSlots.forEach(slot => {
-                timeSelect.innerHTML += `<option>${slot}</option>`;
-            });
-        }
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+// ─── NAVBAR ───────────────────────────────────────────
+const navbar = document.getElementById('navbar');
+const navLinks = document.querySelectorAll('.nav-link');
+const logoText = document.getElementById('logo-text');
+const navPhone = document.getElementById('nav-phone');
+const hamBtn = document.getElementById('hamburger');
 
-        dateInput.addEventListener('change', () => {
-            const d = new Date(dateInput.value);
-            if (d.getDay() === 0) {
-                alert("Clinic is closed on Sunday. Please choose another date.");
-                dateInput.value = '';
-                timeSelect.innerHTML = '<option value="">Select slot</option>';
-            } else {
-                populateTimes();
-            }
-        });
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    navbar.classList.remove('top');
+    navbar.classList.add('scrolled');
+    navLinks.forEach(l => l.style.color = '#0f172a');
+    logoText.style.color = '#0f172a';
+    if (navPhone) navPhone.style.color = '#0ea5e9';
+    hamBtn.style.color = '#0f172a';
+  } else {
+    navbar.classList.add('top');
+    navbar.classList.remove('scrolled');
+    navLinks.forEach(l => l.style.color = 'white');
+    logoText.style.color = 'white';
+    if (navPhone) navPhone.style.color = 'white';
+    hamBtn.style.color = 'white';
+  }
+});
 
-        populateTimes();
+// ─── MOBILE MENU ─────────────────────────────────────
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const ham = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  ham.classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const age = document.getElementById('age').value.trim();
-            const mobile = document.getElementById('mobile').value.trim();
-            const date = dateInput.value;
-            const time = timeSelect.value;
-            const problem = document.getElementById('problem').value.trim() || "Not specified";
+// ─── SCROLL FADE-IN ───────────────────────────────────
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+fadeEls.forEach(el => observer.observe(el));
 
-            if (!date || !time) return alert("Please select date and time.");
+// ─── MODAL ────────────────────────────────────────────
+function openModal() {
+  document.getElementById('booking-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modal-form').style.display = 'block';
+  document.getElementById('success-msg').style.display = 'none';
+}
+function closeModal() {
+  document.getElementById('booking-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleModalClick(e) {
+  if (e.target === document.getElementById('booking-modal')) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-            const msg = `Hello Dr. Shweta,%0AName: ${name}%0AAge: ${age}%0AMobile: ${mobile}%0ADate: ${date}%0ATime: ${time}%0AConcern: ${problem}`;
-            window.open(`https://wa.me/911126414243?text=${msg}`, '_blank');
-        });
-    </script>
+function submitBooking() {
+  const name = document.getElementById('m-name').value.trim();
+  const phone = document.getElementById('m-phone').value.trim();
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  document.getElementById('modal-form').style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+}
+
+function submitContactForm() {
+  const name = document.getElementById('cf-name').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  if (!name || !phone) { alert('Please enter your name and phone number.'); return; }
+  document.getElementById('contact-form-area').style.display = 'none';
+  document.getElementById('contact-success').style.display = 'block';
+}
+
+// ─── TESTIMONIAL CAROUSEL ─────────────────────────────
+let testiIdx = 0;
+const track = document.getElementById('testimonial-track');
+const cards = track.querySelectorAll('.testi-card');
+const totalOriginal = 5;
+const dotsContainer = document.getElementById('testi-dots');
+
+function buildDots() {
+  dotsContainer.innerHTML = '';
+  for (let i = 0; i < totalOriginal; i++) {
+    const d = document.createElement('button');
+    d.style.cssText = `width:\( {i===testiIdx?'24px':'8px'};height:8px;border-radius:999px;border:none;cursor:pointer;transition:all 0.3s;background: \){i===testiIdx?'#0ea5e9':'#cbd5e1'}`;
+    d.onclick = () => { testiIdx = i; slideToIdx(); };
+    dotsContainer.appendChild(d);
+  }
+}
+
+function slideToIdx() {
+  const cardW = cards[0].offsetWidth + 24;
+  track.style.transform = `translateX(-${testiIdx * cardW}px)`;
+  buildDots();
+}
+
+buildDots();
+setInterval(() => {
+  testiIdx = (testiIdx + 1) % totalOriginal;
+  slideToIdx();
+}, 3800);
+
+window.addEventListener('resize', slideToIdx);
+
+// ─── TOOTH TOOLTIP ───────────────────────────────────
+const tooltip = document.getElementById('tooth-tooltip');
+const toothWrapper = document.querySelector('.tooth-wrapper');
+toothWrapper.addEventListener('mouseenter', () => tooltip.classList.add('show'));
+toothWrapper.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+</script>
 </body>
 </html>
